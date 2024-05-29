@@ -399,7 +399,10 @@ def dreambooth_api(_, app: FastAPI):
         if config is None:
             return JSONResponse(status_code=422, content={"message": "Invalid config."})
 
-        return JSONResponse(content=config.concepts())
+        # Convertir los objetos Concept a un formato serializable (lista de diccionarios)
+        concepts_serializable = [json.loads(concept.json()) for concept in config.concepts()]
+
+        return JSONResponse(content=concepts_serializable)
 
     @app.post("/dreambooth/conceptTest")
     async def set_model_concept_Test(
