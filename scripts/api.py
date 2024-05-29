@@ -150,12 +150,7 @@ def dreambooth_api(_, app: FastAPI):
     logger.debug("Loading Dreambooth API Endpoints.")
     logger.info("Loading Dreambooth API Endpoints.")
 
-    @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(request: Request, exc: RequestValidationError):
-        return JSONResponse(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
-        )
+    
 
     @app.get("/dreambooth/cancel")
     async def cancel_jobs(
