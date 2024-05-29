@@ -346,6 +346,9 @@ def dreambooth_api(_, app: FastAPI):
         """
         Add or update a concept. Provide either a full json concept or path to instance dir.
         """
+
+        logger.info("concept")
+
         key_check = check_api_key(api_key)
         if key_check is not None:
             return key_check
