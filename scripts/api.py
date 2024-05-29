@@ -401,29 +401,16 @@ def dreambooth_api(_, app: FastAPI):
 
         return JSONResponse(content=config.concepts())
 
-    @app.post("/dreambooth/concepts")
-    async def set_model_concepts(
+    @app.post("/dreambooth/conceptTest")
+    async def set_model_concept(
             model_name: str = Form(description="The model name to fetch config for."),
             api_key: str = Form("", description="If an API key is set, this must be present."),
-            concepts: List[Concept] = Body()
     ) -> JSONResponse:
         """
         Replace a full concepts list.
         """
-        key_check = check_api_key(api_key)
-        if key_check is not None:
-            return key_check
-        if not model_name:
-            return JSONResponse(status_code=422, content={"message": "Invalid model name."})
-        config = from_file(model_name)
-        if config is None:
-            return JSONResponse(status_code=422, content={"message": "Invalid config."})
-        new_concepts = []
-        for concept in concepts:
-            new_concepts.append(concept.__dict__)
-        config.concepts_list = new_concepts
-        config.save()
-        return JSONResponse(content=config.concepts())
+        
+        return Response("hola")
 
     @app.post("/dreambooth/createModel")
     async def create_db_model(
