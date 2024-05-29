@@ -148,6 +148,8 @@ def file_to_base64(file_path) -> str:
 
 def dreambooth_api(_, app: FastAPI):
     logger.debug("Loading Dreambooth API Endpoints.")
+    logger.info("Loading Dreambooth API Endpoints.")
+
     @app.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
         return JSONResponse(
