@@ -402,7 +402,7 @@ def dreambooth_api(_, app: FastAPI):
         return JSONResponse(content=config.concepts())
 
     @app.post("/dreambooth/conceptTest")
-    async def set_model_concept(
+    async def set_model_concept_Test(
             model_name: str = Form(description="The model name to fetch config for."),
             api_key: str = Form("", description="If an API key is set, this must be present."),
     ) -> JSONResponse:
